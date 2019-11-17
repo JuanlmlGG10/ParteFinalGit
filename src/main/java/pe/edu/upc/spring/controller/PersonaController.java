@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import antlr.debug.NewLineEvent;
 
@@ -70,7 +73,9 @@ public class PersonaController {
 		if (principal instanceof UserDetails) {
 		  username = ((UserDetails)principal).getUsername();
 		} 
+		//Collection<? extends GrantedAuthority> tiporol=((UserDetails)principal).getAuthorities();
 		
+		List<Persona> tiporol=pService.buscarNombre(username);
 		model.put("listaPersonas", pService.buscarNombre(username));
 		return "listPersona";
 	}
