@@ -39,6 +39,8 @@
 								<th class="text-center">EMAIL</th>
 								<th class="text-center">TIPOUSUARIO</th>
 								<th class="text-center">DISTRITO</th>
+								<th class="text-center">USERNAME</th>
+								<th class="text-center">CONTRASENIA</th>
 								<th class="text-center">OPERACIÓN</th>
 								<th class="text-center">OPERACIÓN</th>
 							</tr>
@@ -53,6 +55,8 @@
 								<td th:text="${per.direccionEmail}"></td>
 								<td th:text="${per.tipoUsuario}"></td>
 								<td th:text="${per.distrito.nombreDistrito}"></td>
+								<td th:text="${per.username}"></td>
+								<td th:text="${per.password}"></td>
 								<td><a th:href="@{/persona/eliminar?id=}+${per.idPersona}">Eliminar</a></td>
 								<td><a th:href="@{'/persona/modificar/' + ${per.idPersona}}">Modificar</a></td>
 							</tr>

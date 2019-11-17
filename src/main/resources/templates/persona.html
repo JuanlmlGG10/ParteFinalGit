@@ -84,13 +84,26 @@
 							th:text="${r.nombreDistrito}"
 							th:selected="(${r.idDistrito} == *{distrito.idDistrito})"></option>
 					</select>
-
+					<label for="user">USUARIO:</label> <input type="text"
+						th:field="*{username}" class="form-control" id="user"></input>
+						<!-- th:if Para establecer condiciones, las variables solo son booleanas -->
+						<!-- #{} Expresion de mensaje -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+						<!-- th:errors Se encarga del manejo de errores -->
 				</div>
+				<label for="contrasenia">CONTRASENIA:</label> <input type="text"
+						th:field="*{password}" class="form-control" id="contrasenia"></input>
+						<!-- th:if Para establecer condiciones, las variables solo son booleanas -->
+						<!-- #{} Expresion de mensaje -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+						<!-- th:errors Se encarga del manejo de errores -->
 
 			</div>
 
 			<button type="submit" class="btn btn-primary">Aceptar</button>
-			<a href="/distrito/listar" class="btn btn-danger">Cancelar</a>
+			<a href="/persona/listar" class="btn btn-danger">Cancelar</a>
 
 		</form>
 	</div>

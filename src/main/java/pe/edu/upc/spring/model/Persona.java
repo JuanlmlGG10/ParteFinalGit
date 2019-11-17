@@ -44,6 +44,10 @@ public class Persona implements Serializable{
 	@Pattern(message = "Formato invalido de email", regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	private String direccionEmail;
 	private String tipoUsuario;
+	@Column(length = 30, unique = true)
+	private String username;
+	@Column(length = 60)
+	private String password;
 	@ManyToOne
 	@JoinColumn(name="idDistrito", nullable=false)
 	private Distrito distrito;
@@ -51,7 +55,7 @@ public class Persona implements Serializable{
 		super();
 	}
 	public Persona(int idPersona,String nombrePersona,String apellidoPersona, String numeroDni, String numeroCelular, String direccionEmail, String tipoUsuario,
-			Distrito distrito) {
+			Distrito distrito,String username,String password) {
 		super();
 		this.idPersona = idPersona;
 		this.nombrePersona = nombrePersona;
@@ -61,6 +65,8 @@ public class Persona implements Serializable{
 		this.direccionEmail = direccionEmail;
 		this.tipoUsuario = tipoUsuario;
 		this.distrito = distrito;
+		this.username=username;
+		this.password=password;
 	}
 	public int getIdPersona() {
 		return idPersona;
@@ -110,6 +116,18 @@ public class Persona implements Serializable{
 	}
 	public void setDistrito(Distrito distrito) {
 		this.distrito = distrito;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

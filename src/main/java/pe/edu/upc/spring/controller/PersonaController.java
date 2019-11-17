@@ -8,6 +8,9 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +27,14 @@ import pe.edu.upc.spring.service.IPersonaService;
 
 @Controller
 @RequestMapping("/persona")
-public class PersonaController {
-	
+public class PersonaController implements CommandLineRunner{
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	/*@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}*/
+
 	@Autowired
 	private IPersonaService pService;
 	
@@ -53,6 +62,8 @@ public class PersonaController {
 	public String registrar(@ModelAttribute @Valid Persona objPersona, 
 			BindingResult binRes, Model model ) throws ParseException 
 	{
+		
+		String bcryptPassword = null;
 		if (binRes.hasErrors()) {
 			model.addAttribute("listaDistritos", dService.listar());
 			return "persona";
@@ -60,6 +71,13 @@ public class PersonaController {
 		else {
 			String usuarioo="Cliente";
 			objPersona.setTipoUsuario(usuarioo);
+			for (int i = 0; i < 2; i++) {
+				bcryptPassword = passwordEncoder.encode(objPersona.getPassword());
+				
+			}
+			objPersona.setPassword(bcryptPassword);
+		
+			
 			boolean flag = pService.insertar(objPersona);
 			if (flag) {
 				return "redirect:/persona/listar";
@@ -173,6 +191,11 @@ public class PersonaController {
 		model.addAttribute("persona", new Persona());
 		model.addAttribute("listaDistritos", dService.listar());
 		return "buscarPersona";
+	}
+	
+	@Override
+	public void run(String... args) throws Exception {
+		
 	}
 		
 }
