@@ -32,10 +32,10 @@ public class Usuario implements Serializable {
 
 	private Boolean enabled;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	/*@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private List<Role> roles;
-
+*/
 	public Long getId() {
 		return id;
 	}
@@ -67,7 +67,7 @@ public class Usuario implements Serializable {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-
+/*
 	public List<Role> getRoles() {
 		return roles;
 	}
@@ -75,5 +75,5 @@ public class Usuario implements Serializable {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-
+*/
 }

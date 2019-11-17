@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "authorities", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "authority" }) })
+@Table(name = "authorities", uniqueConstraints = { @UniqueConstraint(columnNames = { "persona_idPersona", "authority" }) })
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;

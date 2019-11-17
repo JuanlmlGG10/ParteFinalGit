@@ -13,7 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.edu.upc.spring.repository.IPersonaDAO;
 import pe.edu.upc.spring.repository.IUsuarioDao;
+import pe.edu.upc.spring.model.Persona;
 import pe.edu.upc.spring.model.Role;
 import pe.edu.upc.spring.model.Usuario;
 
@@ -22,13 +24,13 @@ import pe.edu.upc.spring.model.Usuario;
 public class JpaUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private IUsuarioDao usuarioDao;
+	private IPersonaDAO usuarioDao;
 
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		Usuario usuario = usuarioDao.findByUsername(username);
+		Persona usuario = usuarioDao.findByUsername(username);
 
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
@@ -36,8 +38,7 @@ public class JpaUserDetailsService implements UserDetailsService {
 			authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
 		}
 
-		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true,
-				authorities);
+		return new User(usuario.getUsername(), usuario.getPassword(),authorities);
 	}
 
 }

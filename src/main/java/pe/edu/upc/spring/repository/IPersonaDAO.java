@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import pe.edu.upc.spring.model.Distrito;
 import pe.edu.upc.spring.model.Persona;
+import pe.edu.upc.spring.model.Usuario;
 
 @Repository
 public interface IPersonaDAO extends JpaRepository<Persona, Integer>
@@ -18,4 +19,5 @@ public interface IPersonaDAO extends JpaRepository<Persona, Integer>
 	
 	@Query("from Persona d where d.distrito.idDistrito=:idDistrito")
 	List<Persona> buscarDistrito(@Param("idDistrito")int idDistrito);
+	public Persona findByUsername(String username);
 }
