@@ -14,8 +14,8 @@ import pe.edu.upc.spring.model.Usuario;
 @Repository
 public interface IPersonaDAO extends JpaRepository<Persona, Integer>
 {
-	@Query("from Persona d where d.nombrePersona like %:nombrePersona%")
-	List<Persona> buscarNombre(@Param("nombrePersona") String nombrePersona);
+	@Query("from Persona d where d.username like :username")
+	List<Persona> buscarNombre(@Param("username") String username);
 	
 	@Query("from Persona d where d.distrito.idDistrito=:idDistrito")
 	List<Persona> buscarDistrito(@Param("idDistrito")int idDistrito);

@@ -31,12 +31,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			http.authorizeRequests()
 					.antMatchers("/css/**","/bienvenido").permitAll()
 					.antMatchers("/css/**","/persona/**").permitAll()
-					.antMatchers("/distrito/**").access("hasRole('ROLE_ADMIN') ")
-					.antMatchers("/sede/**").access("hasRole('ROLE_ADMIN')")
+					.antMatchers("/distrito/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') ")
+					.antMatchers("/sede/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+					.antMatchers("/cancha/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 					.antMatchers("/reserva/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')").and()
 					.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/reserva/listar")
 					.permitAll().and().logout().logoutSuccessUrl("/login").permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
-
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

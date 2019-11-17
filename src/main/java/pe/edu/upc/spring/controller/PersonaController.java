@@ -2,17 +2,23 @@ package pe.edu.upc.spring.controller;
 
 import java.text.ParseException;
 import java.util.Map;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,6 +36,7 @@ import pe.edu.upc.spring.model.Distrito;
 import pe.edu.upc.spring.model.Persona;
 import pe.edu.upc.spring.service.IDistritoService;
 import pe.edu.upc.spring.service.IPersonaService;
+import pe.edu.upc.spring.serviceimpl.JpaUserDetailsService;
 import pe.edu.upc.spring.model.Role;
 
 @Controller
@@ -43,6 +50,10 @@ public class PersonaController {
 	}*/
 
 	@Autowired
+	private JpaUserDetailsService userDetailsService;
+	
+	
+	@Autowired
 	private IPersonaService pService;
 	
 	@Autowired
@@ -54,7 +65,13 @@ public class PersonaController {
 	
 	@RequestMapping("/")
 	public String irPersona(Map<String, Object> model) {
-		model.put("listaPersonas", pService.listar());
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = null;
+		if (principal instanceof UserDetails) {
+		  username = ((UserDetails)principal).getUsername();
+		} 
+		
+		model.put("listaPersonas", pService.buscarNombre(username));
 		return "listPersona";
 	}
 	
@@ -83,13 +100,10 @@ public class PersonaController {
 				
 			}
 			objPersona.setPassword(bcryptPassword);
-		/* List<Role> listarol = null;
-		 Role nuevo=new Role();
-		 	nuevo.setAuthority("ROLE_USER");
-			listarol.add(nuevo);
-			
-		 	objPersona.setRoles(listarol);*/
-			
+		
+			Role nuevo=new Role();
+			nuevo.setAuthority("ROLE_USER");
+		 	objPersona.setRoles(Arrays.asList(nuevo));
 			boolean flag = pService.insertar(objPersona);
 			if (flag) {
 				return "redirect:/persona/listar";

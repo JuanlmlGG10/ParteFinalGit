@@ -63,7 +63,7 @@ public class Persona implements Serializable{
 		super();
 	}
 	public Persona(int idPersona,String nombrePersona,String apellidoPersona, String numeroDni, String numeroCelular, String direccionEmail, String tipoUsuario,
-			Distrito distrito,String username,String password) {
+			Distrito distrito,String username,String password,List<Role>roles) {
 		super();
 		this.idPersona = idPersona;
 		this.nombrePersona = nombrePersona;
@@ -75,6 +75,7 @@ public class Persona implements Serializable{
 		this.distrito = distrito;
 		this.username=username;
 		this.password=password;
+		this.roles=roles;
 	}
 	public int getIdPersona() {
 		return idPersona;

@@ -62,9 +62,9 @@ public class PersonaServiceImpl implements IPersonaService {
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Persona> buscarNombre(String nombrePersona) {
+	public List<Persona> buscarNombre(String username) {
 
-		return dPersona.buscarNombre(nombrePersona);
+		return dPersona.buscarNombre(username);
 
 	}
 	
