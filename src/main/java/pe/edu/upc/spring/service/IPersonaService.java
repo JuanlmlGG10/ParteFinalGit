@@ -17,4 +17,5 @@ public interface IPersonaService {
 	List<Persona> listar();
 	List<Persona> buscarNombre(String username);
 	List<Persona> buscarDistrito(int idDistrito);
+	List<Persona> buscarNombre1(String username, String rol);
 }

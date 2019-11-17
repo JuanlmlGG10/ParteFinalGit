@@ -62,10 +62,24 @@ public class PersonaServiceImpl implements IPersonaService {
 
 	@Override
 	@Transactional(readOnly=true)
+	public List<Persona> buscarNombre1(String username,String rol) {
+		List<Persona> listapersona = null;
+		boolean verdad;
+		
+		if(rol=="ROLE_ADMIN") {
+		listapersona= dPersona.findAll();}
+		if(rol=="ROLE_USER") {
+			listapersona=dPersona.buscarNombre(username);
+		}
+		if(listapersona==null) {
+			System.out.println("null");	
+		}
+		return listapersona;
+	}
+	@Override
+	@Transactional(readOnly=true)
 	public List<Persona> buscarNombre(String username) {
-
 		return dPersona.buscarNombre(username);
-
 	}
 	
 	@Override
