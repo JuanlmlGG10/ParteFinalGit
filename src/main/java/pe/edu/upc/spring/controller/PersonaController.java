@@ -105,10 +105,10 @@ public class PersonaController {
 		
 		System.out.println(rooool);
 	
-		//if(rooool=="ROLE_ADMIN") { model.put("listaPersonas", pService.listar());}
-		//else { 
-			model.put("listaPersonas", pService.buscarNombre1(username,rooool));
-			//}
+		if(rooool.equals("ROLE_ADMIN")) { model.put("listaPersonas", pService.listar());}
+		else { 
+			model.put("listaPersonas", pService.buscarNombre(username));
+			}
 		System.out.println(rooool);		
 		return "listPersona";
 	}
@@ -230,7 +230,9 @@ public class PersonaController {
 		
 		
 		 if(persona.getNombrePersona()!="") {
-			listaPersonas = pService.buscarNombre(persona.getNombrePersona());	
+			 System.out.println(persona.getNombrePersona());		
+			listaPersonas = pService.buscarNombreReal(persona.getNombrePersona());	
+			
 			if (listaPersonas.isEmpty()) {
 				model.put("mensaje", "No se encontro");		
 			}

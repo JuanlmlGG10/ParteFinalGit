@@ -96,5 +96,12 @@ public class PersonaServiceImpl implements IPersonaService {
 	public List<Persona> listar() {
 		return dPersona.findAll();
 	}
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> buscarNombreReal(String nombrePersona) {
+
+		return dPersona.buscarNombreReal(nombrePersona);
+
+	}
 
 }

@@ -15,7 +15,9 @@ public interface IPersonaService {
 	public void eliminar(int idPersona);
 	public Optional<Persona> listarId(int idPersona);
 	List<Persona> listar();
+	//List<Persona> buscarpornombrereal(String nombre);
 	List<Persona> buscarNombre(String username);
 	List<Persona> buscarDistrito(int idDistrito);
 	List<Persona> buscarNombre1(String username, String rol);
+	List<Persona> buscarNombreReal(String nombrePersona);
 }

@@ -20,4 +20,7 @@ public interface IPersonaDAO extends JpaRepository<Persona, Integer>
 	@Query("from Persona d where d.distrito.idDistrito=:idDistrito")
 	List<Persona> buscarDistrito(@Param("idDistrito")int idDistrito);
 	public Persona findByUsername(String username);
+	
+	@Query("from Persona r where r.nombrePersona like %:nombrePersona%")
+	List<Persona> buscarNombreReal(@Param("nombrePersona") String nombrePersona);
 }
