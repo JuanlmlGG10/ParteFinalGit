@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>IPD RESERVAS</title>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <div class="jumbotron alert-danger">
+          <h1>Página no encontrada<small><font face="Tahoma" color="red">    Error 404</font></small></h1>
+          <br />
+          <p>La página a la que intentas acceder no fue encontrada o no esta disponible</p>
+          <p><b>Puedes precionar este boton para ir a la página de inicio</b></p>
+          <a href="/" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Ir a un lugar seguro</a>
+<div class="row">
+        <div class="col-md-4">
+        </div>
+         <div class="col-md-4">
+         <img class="img-fluid" th:src="@{/imagenes/404-gif-3.gif}" align="middle" alt="Funny image"  width="350" height="350" > 	
+        </div>
+        </div>      
+        </div>
+        
+        <br />
+      <div class="row col-lg-15 col-md-15 col-sm-15">
+        <h2>Contenido:</h2>
+      
+        <br />
+        <div class="col-lg-4 col-md-6 col-sm-6 mt-15 mb-15">
+        
+          <h3>Intenta mirar nuestras sedes</h3>
+          <p>Puedes dar un vista a todas nuestras sedes disponibles</p>
+          <div class="hero-unit col-lg-4" >
+            <img th:src="@{/imagenes/Dibujo_Atilio_Paiva_Olivera.png}" width="300" height="150" alt="logo" align="middle"></img>
+            <p></p>
+          </br>
+          </br>
+          <a href="/sede/listar" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i> Llevame ahí...</a>
+        </div></div>
+       
+       
+        <div class="col-md-4"> 
+          <h3>Intenta mirar nuestras canchas...</h3>
+          <p>Navega para ver las canchas que tenemos disponibles</p>
+          <div class="hero-unit">
+            <img th:src="@{/imagenes/futbol.jpg}" width="300" height="150" alt="logo" align="middle"></img><!--Why Not Put a Picture To Celebrate Your 404-->
+            <p>
+             </br>
+          </br>
+            <a href="#" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i> Llevame ahí...</a>
+            </p>
+           
+          </div>
+         
+        </div>
+            
+            
+            
+            
+            
+            
+            <div class="thumbnail span3 center">
+          <h3>Intenta realizar una reserva...</h3>
+          <p>Ofrecemos variedad de canchas para las reservas </p>
+          <div class="hero-unit">
+           <img th:src="@{/imagenes/voley.jpeg}" width="300" height="150" alt="logo" align="middle"></img><!--Why Not Put a Picture To Celebrate Your 404-->
+            <p></p>
+          </div>
+           </br>
+          </br>
+          <a href="/reserva/listar" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i> Llevame ahí...</a>
+        </div>
+            
+        <br />
+        <p></p>
+        <!-- By ConnerT HTML & CSS Enthusiast -->  
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

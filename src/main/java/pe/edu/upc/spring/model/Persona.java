@@ -42,6 +42,7 @@ public class Persona implements Serializable{
 	private String nombrePersona;
 	private String apellidoPersona;
 	@Length(min = 8, max = 8)
+	@Column(unique=true)
 	private String numeroDni;
 	@Length(min = 9, max = 9)
 	private String numeroCelular;

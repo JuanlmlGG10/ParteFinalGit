@@ -18,7 +18,7 @@ public class LoginController {
 		
 		if (principal != null) {
 			flash.addFlashAttribute("info", "Ya ha inciado sesión anteriormente");
-			return "redirect:/dueno/listar";
+			return "redirect:/cancha/listar";
 		}
 
 		if (error != null) {
@@ -34,5 +34,15 @@ public class LoginController {
 		
 		return "login";
 
+	}
+	@GetMapping("/error_403")
+	public String errordelogeo() {
+		return "error_403";
+		
+	}
+	@GetMapping("/error")
+	public String errorpagina() {
+		return "error_403";
+		
 	}
 }
