@@ -2,7 +2,10 @@ package pe.edu.upc.spring.controller;
 
 import java.text.ParseException;
 import java.util.Map;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -17,6 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import antlr.debug.NewLineEvent;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -24,10 +30,11 @@ import pe.edu.upc.spring.model.Distrito;
 import pe.edu.upc.spring.model.Persona;
 import pe.edu.upc.spring.service.IDistritoService;
 import pe.edu.upc.spring.service.IPersonaService;
+import pe.edu.upc.spring.model.Role;
 
 @Controller
 @RequestMapping("/persona")
-public class PersonaController implements CommandLineRunner{
+public class PersonaController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	/*@Bean
@@ -76,7 +83,12 @@ public class PersonaController implements CommandLineRunner{
 				
 			}
 			objPersona.setPassword(bcryptPassword);
-		
+		/* List<Role> listarol = null;
+		 Role nuevo=new Role();
+		 	nuevo.setAuthority("ROLE_USER");
+			listarol.add(nuevo);
+			
+		 	objPersona.setRoles(listarol);*/
 			
 			boolean flag = pService.insertar(objPersona);
 			if (flag) {
@@ -193,10 +205,7 @@ public class PersonaController implements CommandLineRunner{
 		return "buscarPersona";
 	}
 	
-	@Override
-	public void run(String... args) throws Exception {
-		
-	}
+	
 		
 }
 
