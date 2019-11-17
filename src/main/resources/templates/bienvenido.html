@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>IPD RESERVAS</title>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Bienvenidos a la página del IPD!</h1>
+        <p >En esta página podrás realizar tus reservas vía online para poder pasar un buen momento con tus amigos sin problemas. Recuerda que la reserva es por hora y primero debes registrarte</p>
+  		<br/>
+  		<div class="row">
+        <div class="col-md-4">
+        <img th:src="@{/imagenes/reserva.jpg}" width="300" height="150" alt="logo" align="middle"></img>
+       </div>
+       <div class="col-md-4">
+        <img th:src="@{/imagenes/futbol.jpg}" width="300" height="150" alt="logo" align="middle"></img>
+       </div>
+        <div class="col-md-4">
+        <img th:src="@{/imagenes/voley.jpeg}" width="300" height="150" alt="logo" align="middle"></img>
+       </div>
+       </div>
+       <br/>
+       <br/>
+        <p><a class="btn btn-primary btn-lg" th:href="@{/reserva/listar}" role="button">¡Comienza a reservar aquí! &raquo;</a></p>          
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>SEDES</h2>
+          <FONT  SIZE=4 COLOR="blue">Nosotros como un ente estatal contamos con diferentes sedes en diferentes distritos donde no hay muchos lugares de entretenimiento deportivo, para poder brindar la mayor satisfacción a nuestros clientes. Si deseas ver las sedes dale click al botón de abajo</FONT>
+          <p> 
+          <img class="masthead-avatar mb-5" th:src="@{/imagenes/gi_20843.png}" alt="" width="350" height="350" ></p>
+          <p><a class="btn btn-default" th:href="@{/sede/listar}" role="button" >Ver Sedes Disponibles &raquo;</a></p>
+        </div>
+        
+        
+        <div class="col-md-4">
+          <h2>Canchas</h2>
+            <FONT  SIZE=4 COLOR="blue">Contamos con diversas canchas con la mayor calidad posible y para diferentes deportes alentando la actividad fisica de todas las personas. Si deseas ver las canchas dale click al botón de abajo</font>
+          <p> 
+          <img class="img-fluid" th:src="@{/imagenes/industria_deportiva.png}" alt="" width="350" height="350" ></p>
+          <p><a class="btn btn-default" th:href="@{/cancha/listar}" role="button" >Ver Canchas &raquo;</a></p>
+       </div>
+       
+        <div class="col-md-4">
+          <h2>Comienza a registrarte para poder reservar</h2>
+            <FONT  SIZE=4 COLOR="blue">Para poder acceder a las reservas tienes que registrarte y cumplirás con todos los requisitos para realizar una reserva. Si deseas registrarte dale click al botón de abajo</font>
+	<img class="masthead-avatar mb-5" th:src="@{/imagenes/avataaars.svg}" alt="">         
+          <p>
+          
+          <br/>
+           <br/>
+          <a class="btn btn-default" th:href="@{/persona/irRegistrar}" role="button">¡Registrate aquí! &raquo;</a></p>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+         <div class="col-md-4">
+         <img class="img-fluid" th:src="@{/imagenes/CloseAnyLadybird-size_restricted.gif}" align="middle" alt="Funny image"> 	
+        </div>
+        </div>
+		
+      <hr>
+
+     
+    </div> <!-- /container -->
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

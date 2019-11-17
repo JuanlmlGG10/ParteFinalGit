@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Sede</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+
+</head>
+<body>
+	<!-- Los fragment se insertan ya sea con th:include o th:replace -->
+	<!-- th:include simplemente se inserta dentro del espacio asignado -->
+	<!-- th:replace remplaza todo el espacio asignado por el fragment correspondiente -->
+	<!-- sintaxis th:include/replace="rutafragment :: Nombre del fragment -->
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<!-- th:action toma la accion de un form que se ejecutara por medio de un boton-->
+		<!-- @{} Expresion de enlace -->
+		<!-- ${} Declaracion de Variable -->
+		<!-- th:object declara un objeto que sera usado por los *{} -->
+		<form th:action="@{/sede/registrar}" method="post" th:object="${sede}"
+		
+			enctype="multipart/form-data">
+			<div class="form-group">
+			<!-- *{} Setea la variable -->
+				<label for="idSede">ID:</label> <input type="text"
+					class="form-control" th:field="*{idSede}"></input>
+
+				<div class="form-group">
+					<label for="nombre">NOMBRE:</label> <input type="text"
+						th:field="*{nombreSede}" class="form-control" id="nombre"></input>
+						<!-- th:if Para establecer condiciones, las variables solo son booleanas -->
+						<!-- #{} Expresion de mensaje -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('nombreSede')}" th:errors="*{nombreSede}"></div>
+						<!-- th:errors Se encarga del manejo de errores -->		
+						
+						<label for="direccion">DIRECCION:</label> <input type="text"
+						th:field="*{direccionLugar}" class="form-control" id="direccion"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('direccionLugar')}" th:errors="*{direccionLugar}"></div>								
+						
+					<label for="distrito" class=" col-sm-2 col-form-label">Distrito: </label> <select
+						class="form-control" th:field="*{distrito.idDistrito}">
+						<!-- th:each Itera los elementos de un arreglo -->
+						<!-- sintaxis th:each="Variable: ${Lista}" -->
+						<!-- th:value Establece el value de la seleccion -->
+						<!-- sintaxis th:value="${Variable.Atributo}" -->
+						<option th:each="r: ${listaDistritos}" th:value="${r.idDistrito}"
+							th:text="${r.nombreDistrito}"
+							th:selected="(${r.idDistrito} == *{distrito.idDistrito})"></option>
+					</select>
+
+				</div>
+
+			</div>
+
+			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/distrito/listar" class="btn btn-danger">Cancelar</a>
+
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

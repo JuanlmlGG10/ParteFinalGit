@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Cancha</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/dueno.js}"></script>
+
+
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<form th:action="@{/cancha/registrar}" method="post" th:object="${cancha}">
+			<div class="form-group">
+				<label for="iddueno">ID:</label> <input type="text"
+					class="form-control" th:field="*{idCancha}"></input>
+
+				<div class="form-group">
+					<label for="nombre">NOMBRE:</label> <input type="text"
+						th:field="*{nombreCancha}" class="form-control" id="nombre"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('nombreCancha')}" th:errors="*{nombreCancha}"></div>
+						
+						
+						
+						<label for="sede" class=" col-sm-2 col-form-label">Sede: </label> <select
+						class="form-control" th:field="*{sede.idSede}">
+						<!-- th:each Itera los elementos de un arreglo -->
+						<!-- sintaxis th:each="Variable: ${Lista}" -->
+						<!-- th:value Establece el value de la seleccion -->
+						<!-- sintaxis th:value="${Variable.Atributo}" -->
+						<option th:each="r: ${listaSedes}" th:value="${r.idSede}"
+							th:text="${r.nombreSede}"
+							th:selected="(${r.idSede} == *{sede.idSede})"></option>
+					</select>
+					
+					<label for="tipocancha" class=" col-sm-2 col-form-label">Tipo de Cancha: </label> <select
+						class="form-control" th:field="*{tipoCancha.idTipoCancha}">
+						<!-- th:each Itera los elementos de un arreglo -->
+						<!-- sintaxis th:each="Variable: ${Lista}" -->
+						<!-- th:value Establece el value de la seleccion -->
+						<!-- sintaxis th:value="${Variable.Atributo}" -->
+						<option th:each="r: ${listaTipoCanchas}" th:value="${r.idTipoCancha}"
+							th:text="${r.nombreTipoCancha}"
+							th:selected="(${r.idTipoCancha} == *{tipoCancha.idTipoCancha})"></option>
+					</select>
+					
+					
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/cancha/listar" class="btn btn-danger">Cancelar</a>
+
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

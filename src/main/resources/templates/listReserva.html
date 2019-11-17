@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Reserva</title>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="container">
+		<form id="myform">
+			<div class="row clearfix">
+				<div class="col-md-12 column" >
+					<a  style="border-bottom-color: green" th:href="@{/reserva/irRegistrar}" id="add-row" type="button"
+						class="btn btn-primary btn-md left-block"> <span
+						class="glyphicon glyphicon-plus" ></span> Reserva
+					</a>
+					<a  style="border-bottom-color: green" th:href="@{/reserva/irBuscar}" id="add-row" type="button"
+						class="btn btn-primary btn-md left-block"> <span
+						class="glyphicon glyphicon-search" ></span> 
+					</a>
+					<table class="table table-bordered table-hover table-striped"
+						id="tab_logic">
+						<thead>
+							<tr>
+								<th class="text-center">CODIGO</th>
+								<th class="text-center">NOMBRE PERSONA</th>
+								<th class="text-center">MONTO</th>
+								<th class="text-center">FECHA DE RESERVA</th>
+								<th class="text-center">FECHA DE REGISTRO</th>
+								<th class="text-center">HORA INICIO</th>
+								<th class="text-center">HORA FIN</th>
+								<th class="text-center">CANCHA</th>
+								<th class="text-center">TIPO DE PAGO</th>
+								<th class="text-center">COMENTARIO</th>
+								<th class="text-center">PRECIO</th>
+								<th class="text-center">OPERACIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="per: ${listaReservas}">
+								<td th:text="${per.idReserva}"></td>
+								<td th:text="${per.persona.nombrePersona}"></td>
+								<td th:text="${per.montoReserva}"></td>
+								<td th:text="${per.fechaReserva}"></td>
+								<td th:text="${per.fechaRegistro}"></td>
+								<td th:text="${per.horaInicio}"></td>
+								<td th:text="${per.horaFin}" ></td>
+								<td th:text="${per.cancha.nombreCancha}"></td>
+								<td th:text="${per.NTipopago}"></td>
+								<td th:text="${per.comentarioReserva}"></td>
+								<td th:text="${per.cancha.tipoCancha.precioHora}"></td>
+								<td><a th:href="@{/reserva/eliminar?id=}+${per.idReserva}">Eliminar</a></td>
+								<td><a th:href="@{'/reserva/modificar/' + ${per.idReserva}}">Modificar</a></td>
+							</tr>
+						</tbody>
+
+					</table>
+					
+				</div>
+			</div>
+			<div th:if="${mensaje}" class="alert alert-danger">
+			<p th:text="${mensaje}"></p>
+			</div>
+		</form>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

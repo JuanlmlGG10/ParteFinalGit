@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Reserva</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/dueno.js}"></script>
+
+
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<form th:action="@{/reserva/registrar}" method="post" th:object="${reserva}">
+			<div class="form-group">
+				<label for="iddueno">ID:</label> <input type="text"
+					class="form-control" th:field="*{idReserva}"></input>
+
+				<div class="form-group">
+						<label for="persona" class=" col-sm-2 col-form-label">Persona: </label> <select
+						class="form-control" th:field="*{persona.idPersona}" >
+						<!-- th:each Itera los elementos de un arreglo -->
+						<!-- sintaxis th:each="Variable: ${Lista}" -->
+						<!-- th:value Establece el value de la seleccion -->
+						<!-- sintaxis th:value="${Variable.Atributo}" -->
+						<option th:each="r: ${listaPersonas}" th:value="${r.idPersona}"
+							th:text="${r.nombrePersona}"
+							th:selected="(${r.idPersona} == *{persona.idPersona})"></option>
+					</select>
+					
+					<label for="cancha" class=" col-sm-2 col-form-label">Cancha: </label> <select
+						class="form-control" th:field="*{cancha.idCancha}" >
+						<!-- th:each Itera los elementos de un arreglo -->
+						<!-- sintaxis th:each="Variable: ${Lista}" -->
+						<!-- th:value Establece el value de la seleccion -->
+						<!-- sintaxis th:value="${Variable.Atributo}" -->
+						<option th:each="r: ${listaCanchas}" th:value="${r.idCancha}"
+							th:text="${r.nombreCancha}"
+							th:selected="(${r.idCancha} == *{cancha.idCancha})"></option>
+					</select>
+					<label for="monto">MONTO:</label> <input type="text"
+						th:field="*{montoReserva}" class="form-control" id="monto" readonly="true"></input>
+						<!-- th:if Para establecer condiciones, las variables solo son booleanas -->
+						<!-- #{} Expresion de mensaje -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('montoReserva')}" th:errors="*{montoReserva}"></div>
+						<!-- th:errors Se encarga del manejo de errores -->
+					
+					<label for="fechaReserva">FECHA DE RESERVA:</label> <input
+						type="date" th:field="*{fechaReserva}" class="form-control" 
+						id="fechaReserva"></input>
+						<!-- th:errors Se encarga del manejo de errores -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('fechaReserva')}"
+						th:errors="*{fechaReserva}"></div>
+						
+					<label for="fechaRegistro">FECHA DE REGISTRO:</label> <input
+						type="date" th:field="*{fechaRegistro}" class="form-control"
+						id="fechaRegistro" ></input>
+						<!-- th:errors Se encarga del manejo de errores -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('fechaRegistro')}"
+						th:errors="*{fechaRegistro}"></div>
+						
+						
+					<label for="horaInicio">HORA INICIO:</label> <input
+						type="time" th:field="*{horaInicio}" class="form-control"
+						id="horaInicio" pattern="HH" min=6:00 max=24:00 step="3600"></input>
+						<!-- th:errors Se encarga del manejo de errores -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('horaInicio')}"
+						th:errors="*{horaInicio}"></div>
+					
+						<label for="horaFin">HORA FIN:</label> <input
+						type="time" th:field="*{horaFin}" class="form-control"
+						id="horaFin" pattern="HH" min=6:00 max=24:00 step="3600"></input>
+						<!-- th:errors Se encarga del manejo de errores -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('horaFin')}"
+						th:errors="*{horaFin}"></div>
+						
+						
+						
+						<label for="tipopago" class=" col-sm-2 col-form-label">TIPO DE PAGO: </label> <select
+						class="form-control" th:field="*{NTipopago}" >
+						<!-- th:each Itera los elementos de un arreglo -->
+						<!-- sintaxis th:each="Variable: ${Lista}" -->
+						<!-- th:value Establece el value de la seleccion -->
+						<!-- sintaxis th:value="${Variable.Atributo}" -->
+						<option value="EFECTIVO">EFECTIVO</option>
+					    <option value="TARJETA">TARJETA</option>
+					    <option value="PAYPAL">PAYPAL</option>
+					</select>
+					
+					<label for="comentario">COMENTARIO:</label> <input type="text"
+						th:field="*{comentarioReserva}" class="form-control" id="comentario"></input>
+						<!-- th:if Para establecer condiciones, las variables solo son booleanas -->
+						<!-- #{} Expresion de mensaje -->
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('comentarioReserva')}" th:errors="*{comentarioReserva}"></div>
+						<!-- th:errors Se encarga del manejo de errores -->
+					
+					
+					
+					
+					
+					
+					
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/reserva/listar" class="btn btn-danger">Cancelar</a>
+
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

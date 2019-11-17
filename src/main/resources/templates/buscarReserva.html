@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Buscar Reserva</title>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<form th:action="@{/reserva/buscar}" method="post" th:object="${reserva}">
+
+
+			<div class="form-group">
+				<label for="persona" class=" col-sm-2 col-form-label">Persona: </label> <select
+						class="form-control" th:field="*{persona.idPersona}">
+						<!-- th:each Itera los elementos de un arreglo -->
+						<!-- sintaxis th:each="Variable: ${Lista}" -->
+						<!-- th:value Establece el value de la seleccion -->
+						<!-- sintaxis th:value="${Variable.Atributo}" -->
+						<option th:each="r: ${listaPersonas}" th:value="${r.idPersona}"
+							th:text="${r.nombrePersona}"
+							th:selected="(${r.idPersona} == *{persona.idPersona})"></option>
+					</select>
+				
+			</div>
+			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/reserva/listar" class="btn btn-danger">Cancelar</a>
+
+		</form>
+
+		<table class="table table-bordered table-hover table-striped"
+			id="tab_logic">
+			<thead>
+				<tr>
+					<th class="text-center">CODIGO</th>
+					<th class="text-center">NOMBRE</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="rac: ${listaReservas}">
+					<td th:text="${rac.idReserva}"></td>
+					<td th:text="${rac.persona.nombrePersona}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div th:if="${mensaje}" class="alert alert-info">
+			<p th:text="${mensaje}"></p>
+		</div>
+	</div>
+	<div class="container">
+		<form th:action="@{/reserva/buscar1}" method="post" th:object="${reserva}">
+
+
+			<div class="form-group">
+					<label for="cancha" class=" col-sm-2 col-form-label">Cancha: </label> <select
+						class="form-control" th:field="*{cancha.idCancha}">
+						<!-- th:each Itera los elementos de un arreglo -->
+						<!-- sintaxis th:each="Variable: ${Lista}" -->
+						<!-- th:value Establece el value de la seleccion -->
+						<!-- sintaxis th:value="${Variable.Atributo}" -->
+						<option th:each="r: ${listaCanchas}" th:value="${r.idCancha}"
+							th:text="${r.nombreCancha}"
+							th:selected="(${r.idCancha} == *{cancha.idCancha})"></option>
+					</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/reserva/listar" class="btn btn-danger">Cancelar</a>
+
+		</form>
+
+		<table class="table table-bordered table-hover table-striped"
+			id="tab_logic">
+			<thead>
+				<tr>
+					<th class="text-center">CODIGO</th>
+					<th class="text-center">NOMBRE</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="rac: ${listaReservas1}">
+					<td th:text="${rac.idReserva}"></td>
+					<td th:text="${rac.persona.nombrePersona}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div th:if="${mensaje}" class="alert alert-info">
+			<p th:text="${mensaje}"></p>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
