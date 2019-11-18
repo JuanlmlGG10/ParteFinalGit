@@ -24,4 +24,5 @@ public interface IReservaService {
 	List<Reserva> buscarCancha(int idCancha);
 	List<Reserva> buscarPorFecha(Date fechaInicio,Date fechaFin);
 	List<Reserva> buscarPersonaid(int idPersona);
+	List<Reserva> buscarPorUserName(String username);
 }

@@ -31,4 +31,6 @@ public interface IReservaDAO extends JpaRepository<Reserva, Integer>
 	List<Reserva> buscarPersonaid(@Param("idPersona")int idPersona);
 	/*@Query("from Reserva r where r.ejemplar.libro.idLibro=:idLibro")
 	List<Reserva> buscarPorLibro(@Param("idLibro") int idLibro);*/
+	@Query("from Reserva d where d.persona.username=:username")
+	List<Reserva> buscarUserName(@Param("username") String username);
 }

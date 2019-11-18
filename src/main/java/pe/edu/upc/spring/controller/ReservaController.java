@@ -10,6 +10,8 @@ import javax.validation.Valid;
 
 import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,7 +62,26 @@ public class ReservaController {
 	
 	@RequestMapping("/")
 	public String irReserva(Map<String, Object> model) {
-		model.put("listaReservas", rService.listar());
+		
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = null;
+		if (principal instanceof UserDetails) {
+		  username = ((UserDetails)principal).getUsername();
+		} 
+		//Collection<? extends GrantedAuthority> tiporol=((UserDetails)principal).getAuthorities();
+		
+		List<Persona> tiporol=pService.buscarNombre(username);
+		
+		if(tiporol==null) {return "error";}
+		Persona personalogeada=null;
+		String rooool=tiporol.get(0).getRoles().get(0).getAuthority();
+		
+		if(rooool.equals("ROLE_ADMIN")) {model.put("listaReservas", rService.listar());}
+		else { 
+			model.put("listaReservas", rService.buscarPorUserName(username));
+			}
+		
 		return "listReserva";
 	}
 	
@@ -68,7 +89,26 @@ public class ReservaController {
 	public String irRegistrar(Model model) {
 		model.addAttribute("reserva", new Reserva());
 		model.addAttribute("listaCanchas", cService.listar());
-		model.addAttribute("listaPersonas", pService.listar());
+		
+		
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = null;
+		if (principal instanceof UserDetails) {
+		  username = ((UserDetails)principal).getUsername();
+		} 
+		List<Persona> tiporol=pService.buscarNombre(username);
+		String rooool=tiporol.get(0).getRoles().get(0).getAuthority();
+		if(rooool.equals("ROLE_ADMIN")) { model.addAttribute("listaPersonas", pService.listar());}
+		else { 
+			model.addAttribute("listaPersonas", pService.buscarNombre(username));
+			}
+		//model.addAttribute("listaPersonas", pService.listar());
+		
+		
+		
+		
+		
 		return "reserva";
 	}
 	
@@ -182,7 +222,24 @@ public class ReservaController {
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaReservas", rService.listar());
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = null;
+		if (principal instanceof UserDetails) {
+		  username = ((UserDetails)principal).getUsername();
+		} 
+		//Collection<? extends GrantedAuthority> tiporol=((UserDetails)principal).getAuthorities();
+		
+		List<Persona> tiporol=pService.buscarNombre(username);
+		
+		if(tiporol==null) {return "error";}
+		Persona personalogeada=null;
+		String rooool=tiporol.get(0).getRoles().get(0).getAuthority();
+		
+		if(rooool.equals("ROLE_ADMIN")) {model.put("listaReservas", rService.listar());}
+		else { 
+			model.put("listaReservas", rService.buscarPorUserName(username));
+			}
+		
 		return "listReserva";
 	}
 	
@@ -204,7 +261,7 @@ public class ReservaController {
 		
 		listaReservas= rService.buscarPersonaid(reserva.getPersona().getIdPersona());		
 		if (listaReservas.isEmpty()) {
-			listaReservas=rService.buscarCancha(reserva.getCancha().getIdCancha());
+			//listaReservas=rService.buscarCancha(reserva.getCancha().getIdCancha());
 			if (listaReservas.isEmpty()) {
 			model.put("mensaje", "No se encontro");}						
 		}

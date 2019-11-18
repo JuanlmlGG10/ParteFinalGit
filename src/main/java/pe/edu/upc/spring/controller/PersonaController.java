@@ -213,7 +213,48 @@ public class PersonaController {
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaPersonas", pService.listar());
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = null;
+		if (principal instanceof UserDetails) {
+		  username = ((UserDetails)principal).getUsername();
+		} 
+		//Collection<? extends GrantedAuthority> tiporol=((UserDetails)principal).getAuthorities();
+		
+		List<Persona> tiporol=pService.buscarNombre(username);
+		
+		if(tiporol==null) {return "error";}
+		Persona personalogeada=null;
+		/*for (int i = 0; i < tiporol.size(); i++) {
+			if(tiporol.get(i).getUsername()==username) {
+				personalogeada=tiporol.get(i);
+				
+			}
+		}*/
+		
+		/*for (int i = 0; i < personalogeada.getRoles().size(); i++) {
+			
+			if(personalogeada.getRoles().get(i).getAuthority()=="ROLE_USER")
+			{model.put("listaPersonas", pService.buscarNombre(username));
+			break;
+			}
+			if(personalogeada.getRoles().get(i).getAuthority()=="ROLE_ADMIN")
+			{model.put("listaPersonas", pService.listar());
+			break;
+			
+		
+		}
+			}*/
+		
+		String rooool=tiporol.get(0).getRoles().get(0).getAuthority();
+		//if(Role==""||Role==null) {return "error";}
+		
+		System.out.println(rooool);
+	
+		if(rooool.equals("ROLE_ADMIN")) { model.put("listaPersonas", pService.listar());}
+		else { 
+			model.put("listaPersonas", pService.buscarNombre(username));
+			}
+		System.out.println(rooool);		
 		return "listPersona";
 	}
 	

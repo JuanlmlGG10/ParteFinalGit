@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.spring.model.Cancha;
+import pe.edu.upc.spring.model.Persona;
 import pe.edu.upc.spring.model.Reserva;
 import pe.edu.upc.spring.repository.IReservaDAO;
 import pe.edu.upc.spring.service.IReservaService;
@@ -89,6 +90,13 @@ public class ReservaServiceImpl implements IReservaService {
 	public List<Reserva> buscarPersonaid(int idPersona){
 		return dReserva.buscarPersonaid(idPersona);
 		
+	}
+	@Override
+	@Transactional(readOnly=true)
+	public List<Reserva> buscarPorUserName(String username) {
+
+		return dReserva.buscarUserName(username);
+
 	}
 	
 }
