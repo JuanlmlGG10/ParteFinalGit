@@ -115,11 +115,19 @@ public class PersonaController {
 	
 	@RequestMapping("/irRegistrar")
 	public String irRegistrar(Model model) {
+		
 		model.addAttribute("persona", new Persona());
 		model.addAttribute("listaDistritos", dService.listar());
 		return "persona";
 	}
 	
+	@RequestMapping("/irRegistrarError")
+	public String irRegistrarError(Model model) {
+		model.addAttribute("mensaje", "El DNI o username estan repetidos por favor verifique");
+		model.addAttribute("persona", new Persona());
+		model.addAttribute("listaDistritos", dService.listar());
+		return "persona";
+	}
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute @Valid Persona objPersona, 
 			BindingResult binRes, Model model ) throws ParseException 
@@ -142,7 +150,22 @@ public class PersonaController {
 			Role nuevo=new Role();
 			nuevo.setAuthority("ROLE_USER");
 		 	objPersona.setRoles(Arrays.asList(nuevo));
-			boolean flag = pService.insertar(objPersona);
+			
+		 /*	List<Persona> verificardni=pService.listar();
+		 	Persona dni = null;
+		 	for (int i = 0; i < verificardni.size(); i++) {
+				if(verificardni.get(i).getNumeroDni().equals(objPersona.getNumeroDni())) {
+				dni=verificardni.get(i);
+				break;
+				}
+			}
+		 	if(dni!=null) {
+				
+				
+				return "redirect:/persona/irRegistrarError";
+		 	}
+		 	else {*/
+		 	boolean flag = pService.insertar(objPersona);
 			if (flag) {
 				return "redirect:/persona/listar";
 			}
@@ -150,6 +173,7 @@ public class PersonaController {
 				model.addAttribute("mensaje", "Ocurrio un roche");
 				return "redirect:/persona/irRegistrar";
 			}
+		//}
 		}
 	}
 	
